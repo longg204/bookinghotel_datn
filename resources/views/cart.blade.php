@@ -230,17 +230,10 @@
                             </div>
                             <div class="mobile_fixed-btn_wrapper">
                                 <div class="button-wrapper container">
-{{--                                    <a href="{{ route("payment") }}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>--}}
-{{--                                    <form action="{{ url('/payment') }}" method="POST">--}}
-{{--                                    <form action="{{ route("payment") }}" method="POST">--}}
-                                    <form action="{{ route("payment") }}" method="POST">
-
+{{--                                    <a href="{{ route("cart.checkout") }}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>--}}
+                                    <form action="{{ url('/payment') }}" method="POST">
                                         @csrf
-
-                                        @method('PUT')
-                                            <button>Thanh Toán</button>
-
-
+                                        <button type="submit" name="redirect" class="btn btn-primary btn-checkout">Pay with VN Pay</button>
                                     </form>
                                 </div>
                             </div>

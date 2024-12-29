@@ -11,6 +11,7 @@
     use App\Http\Controllers\CartController;
     use App\Http\Controllers\WishlistController;
     use App\Http\Controllers\ContactController;
+    use App\Http\Controllers\PaymentController;
     use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -49,13 +50,16 @@
     Route::post('/place-order',[CartController::class,'place_order'])->name('cart.place.order');
     Route::get('/order-confirmation',[CartController::class,'confirmation'])->name('cart.confirmation');
 
+    /* User*/
     Route::middleware(['auth'])->group(function () {
         Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
         Route::get('/account-orders',[UserController::class,'account_orders'])->name('user.account.orders');
         Route::get('/account-order-details/{order_id}',[UserController::class,'account_order_details'])->name('user.account.order.details');
         Route::put('/account-order/cancel-order',[UserController::class,'account_cancel_order'])->name('user.account_cancel_order');
 
+        Route::post('/payment', [PaymentController::class, 'vn_payment']);
     });
+
 
     Route::middleware(['auth', AuthAdmin::class])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -123,7 +127,6 @@
 //        })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
         /* payment */
-//        Route::post('/payment', [PaymentController::class, 'handlePayment'])->middleware('auth');
-        Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
+//        Route::get('/user/payment',[PaymentController::class,'payment'])->name('user.payment')->middleware('auth');
     });
 
