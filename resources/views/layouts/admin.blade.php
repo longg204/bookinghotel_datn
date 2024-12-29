@@ -145,8 +145,8 @@
 
                             <li class="menu-item">
                                 <a href="settings.html" class="">
-                                    <div class="icon"><i class="icon-settings"></i></div>
-                                    <div class="text">Settings</div>
+                                    <div class="icon"><i class="icon-file-plus"></i></div>
+                                    <div class="text">Feedback</div>
                                 </a>
                             </li>
 
@@ -154,7 +154,7 @@
                                 <form method="POST" action="{{ route('logout') }}" id="logout-form">
                                     @csrf
                                     <a href="settings.html" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                            <div class="icon"><i class="icon-settings"></i></div>
+                                            <div class="icon"><i class="icon-log-out"></i></div>
                                             <div class="text">Logout</div>
                                     </a>
                                 </form>

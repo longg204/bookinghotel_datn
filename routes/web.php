@@ -1,6 +1,7 @@
 <?php
 
     use Illuminate\Support\Facades\Auth;
+    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\HomeController;
     use App\Http\Controllers\UserController;
@@ -10,6 +11,8 @@
     use App\Http\Controllers\CartController;
     use App\Http\Controllers\WishlistController;
     use App\Http\Controllers\ContactController;
+    use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 
     Auth::routes();
 
@@ -99,4 +102,28 @@
         /* users */
         Route::get('/admin/users',[AdminController::class,'users'])->name('admin.users');
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'user_delete'])->name('admin.user.delete');
+
+
+
+        /* verify email*/
+//        Route::get('/email/verify', function () {
+//            return view('auth.verify-email');
+//        })->middleware('auth')->name('verification.notice');
+//
+//        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//            $request->fulfill();
+//
+//            return redirect('/home');
+//        })->middleware(['auth', 'signed'])->name('verification.verify');
+//
+//        Route::post('/email/verification-notification', function (Request $request) {
+//            $request->user()->sendEmailVerificationNotification();
+//
+//            return back()->with('message', 'Verification link sent!');
+//        })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+        /* payment */
+//        Route::post('/payment', [PaymentController::class, 'handlePayment'])->middleware('auth');
+        Route::get('/payment', [PaymentController::class, 'payment'])->name('payment');
     });
+
