@@ -9,7 +9,14 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function rooms() {
-        return $this->hasMany(Product::class);
+    protected $fillable = ['user_id', 'room_id', 'quantity'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function cart() {
+        return $this->belongsTo(Cart::class);
     }
 }

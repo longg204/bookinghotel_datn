@@ -45,60 +45,6 @@
         .select-coupon {
             border: 0.125rem solid #e4e4e4;
         }
-
-        /*select {
-            border: none;
-            outline: 0;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-            width: 100%;
-            padding: 14px 22px;
-            font-family: "Inter", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            background-color: transparent;
-            border: 1px solid #ECF0F4;
-            border-radius: 12px;
-            color: #111;
-            margin-bottom: 0px;
-            position: relative;
-            cursor: pointer;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            -ms-appearance: none;
-        }
-
-        .select::after {
-            position: absolute;
-            content: "\e934";
-            right: 22px;
-            top: 50%;
-            font-family: "icomoon";
-            font-size: 18px;
-            color: var(--Body-Text);
-            pointer-events: none;
-            -webkit-transition: 0.25s all ease;
-            -o-transition: 0.25s all ease;
-            transition: 0.25s all ease;
-            -webkit-transform: translateY(-50%);
-            -ms-transform: translateY(-50%);
-            -o-transform: translateY(-50%);
-            transform: translateY(-50%);
-        }
-
-        select option {
-            font-family: "Inter", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 20px;
-            color: #111;
-            background: #F2F7FB;
-            text-transform: capitalize;
-            cursor: pointer;
-        }*/
     </style>
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
@@ -134,7 +80,7 @@
                             <thead>
                                 <tr>
                                     <th>Room</th>
-                                    <th></th>
+                                    <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Subtotal</th>
@@ -153,14 +99,14 @@
                                             <div class="shopping-cart__product-item__detail">
                                                 <h4>{{ $item->name }}</h4>
                                                 <ul class="shopping-cart__product-item__options">
-                                                        <li>Categories: Yellow</li>
-                                                        <li>price: {{ $item->price }}</li>
+{{--                                                        <li>Categories: {{ $item->category }}</li>--}}
+{{--                                                        <li>price: {{ $item->price }}</li>--}}
 {{--                                                    {{ dd($item) }}--}}
                                                 </ul>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="shopping-cart__product-price">${{ $item->price }}</span>
+                                            <span class="shopping-cart__product-price" style="color: black">${{ $item->price }}</span>
                                         </td>
                                         <td>
                                             <div class="qty-control position-relative">
@@ -253,12 +199,6 @@
                                                 <th>Subtotal After Discount</th>
                                                 <td>${{ Session::get("discounts")['subtotal'] }}</td>
                                             </tr>
-{{--                                            <tr>--}}
-{{--                                                <th>Shipping</th>--}}
-{{--                                                <td>--}}
-{{--                                                    Free--}}
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
                                             <tr>
                                                 <th>VAT</th>
                                                 <td>${{ Session::get("discounts")['tax'] }}</td>
@@ -276,12 +216,6 @@
                                                 <th>Subtotal</th>
                                                 <td>${{ Cart::instance('cart')->subtotal() }}</td>
                                             </tr>
-{{--                                            <tr>--}}
-{{--                                                <th>Shipping</th>--}}
-{{--                                                <td>--}}
-{{--                                                    Free--}}
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
                                             <tr>
                                                 <th>VAT</th>
                                                 <td>${{ Cart::instance("cart")->tax() }}</td>

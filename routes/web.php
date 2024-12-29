@@ -9,12 +9,13 @@
     use App\Http\Controllers\RoomController;
     use App\Http\Controllers\CartController;
     use App\Http\Controllers\WishlistController;
+    use App\Http\Controllers\ContactController;
 
     Auth::routes();
 
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-    /* shop */
+    /* room */
     Route::get("/room", [RoomController::class, "index"])->name("room.index");
     Route::get("/room/{slug}", [RoomController::class, "room_detail"])->name("room.detail");
 
@@ -27,6 +28,11 @@
     Route::delete("/cart/clear", [CartController::class, "empty_cart"])->name("cart.empty");
     Route::post("/cart/apply-coupon", [CartController::class, "apply_coupon_code"])->name("cart.coupon.apply");
     Route::delete("/cart/remove-coupon", [CartController::class, "remove_coupon_code"])->name("cart.coupon.remove");
+
+
+    /* contact */
+    Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
+    Route::post("/contact", [ContactController::class, 'add_to_contact'])->name("contact.add");
 
     /* wishlist */
     Route::get("/wishlist", [WishlistController::class, "index"])->name("wishlist.index");
@@ -43,7 +49,7 @@
     Route::middleware(['auth'])->group(function () {
         Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
         Route::get('/account-orders',[UserController::class,'account_orders'])->name('user.account.orders');
-        Route::get('/account-order-detials/{order_id}',[UserController::class,'account_order_details'])->name('user.acccount.order.details');
+        Route::get('/account-order-details/{order_id}',[UserController::class,'account_order_details'])->name('user.account.order.details');
         Route::put('/account-order/cancel-order',[UserController::class,'account_cancel_order'])->name('user.account_cancel_order');
 
     });

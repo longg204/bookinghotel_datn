@@ -3,7 +3,11 @@
     <main class="pt-90">
         <div class="mb-4 pb-4"></div>
         <section class="my-account container">
-            <h2 class="page-title">My Account</h2>
+            <h2 class="page-title">
+                @if(Auth::getUser())
+                    {{ Auth::getUser()->name }}
+                    @endif
+                    Account</h2>
             <div class="row">
                 <div class="col-lg-3">
                     @include('user.account-nav')
@@ -17,8 +21,7 @@
                             @endif
                         </p>
                         <p>From your account dashboard you can view your <a class="unerline-link" href="account_orders.html">recent
-                                orders</a>, manage your <a class="unerline-link" href="account_edit_address.html">shipping
-                                addresses</a>, and <a class="unerline-link" href="account_edit.html">edit your password and account
+                                orders</a>, and <a class="unerline-link" href="account_edit.html">edit your password and account
                                 details.</a></p>
                     </div>
                 </div>

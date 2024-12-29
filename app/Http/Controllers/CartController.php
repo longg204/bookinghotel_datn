@@ -153,6 +153,7 @@
                 $orderitem->order_id = $order->id;
                 $orderitem->price = $item->price;
                 $orderitem->quantity = $item->qty;
+//                $orderitem->category = $item->category;
                 $orderitem->save();
             }
 
