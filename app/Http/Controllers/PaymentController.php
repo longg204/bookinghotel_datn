@@ -8,6 +8,8 @@ class PaymentController extends Controller
 {
     public function vn_payment(Request $request)
     {
+
+        $lll = 'dfasfsadf';
         $vnp_TmnCode = "J1TZEB1U"; //Mã website tại VNPAY
         $vnp_HashSecret = "7H0R8NR113SB9ROB4TOT9A3YINJ646GW"; //Chuỗi bí mật
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
