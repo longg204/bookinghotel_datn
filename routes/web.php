@@ -12,12 +12,14 @@
     use App\Http\Controllers\WishlistController;
     use App\Http\Controllers\ContactController;
     use App\Http\Controllers\PaymentController;
+    use App\Http\Controllers\SendMailController;
     use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
     Auth::routes();
 
-    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+    Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware(['auth', 'verified']);
 
     /* room */
     Route::get("/room", [RoomController::class, "index"])->name("room.index");
@@ -35,8 +37,12 @@
 
 
     /* contact */
-    Route::get("/contact", [ContactController::class, "index"])->name("contact.index");
-    Route::post("/contact", [ContactController::class, 'add_to_contact'])->name("contact.add");
+    Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+//    Route::post("/contact", [ContactController::class, 'add_to_contact'])->name("contact.add");
+
+
+    /* about */
+    Route::get('/about', [\App\Http\Controllers\AboutController::class, 'about'])->name('about');
 
     /* wishlist */
     Route::get("/wishlist", [WishlistController::class, "index"])->name("wishlist.index");
@@ -57,10 +63,27 @@
         Route::get('/account-order-details/{order_id}',[UserController::class,'account_order_details'])->name('user.account.order.details');
         Route::put('/account-order/cancel-order',[UserController::class,'account_cancel_order'])->name('user.account_cancel_order');
 
-        Route::post('/payment', [PaymentController::class, 'vn_payment']);
+        Route::post('/payment-vnpay', [PaymentController::class, 'vn_payment']);
     });
 
+    /* verify email */
 
+//     Route để hiển thị trang yêu cầu xác minh
+    Route::get('/email/verify', [SendMailController::class, 'verify_email'])->name('verification.notice');
+
+    // Route để xử lý liên kết xác minh
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill(); // Xác minh email thành công
+        return redirect('/')->with('message', 'Email verified successfully!');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+
+//    Route::get('/email/verify', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyNotice'])->name('verification.notice');
+//
+//    Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
+//
+//    Route::post('/email/verification-notification', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyHandler'])->middleware('throttle:6,1')->name('verification.send');
+
+    /* admin */
     Route::middleware(['auth', AuthAdmin::class])->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
@@ -106,27 +129,5 @@
         /* users */
         Route::get('/admin/users',[AdminController::class,'users'])->name('admin.users');
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'user_delete'])->name('admin.user.delete');
-
-
-
-        /* verify email*/
-//        Route::get('/email/verify', function () {
-//            return view('auth.verify-email');
-//        })->middleware('auth')->name('verification.notice');
-//
-//        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//            $request->fulfill();
-//
-//            return redirect('/home');
-//        })->middleware(['auth', 'signed'])->name('verification.verify');
-//
-//        Route::post('/email/verification-notification', function (Request $request) {
-//            $request->user()->sendEmailVerificationNotification();
-//
-//            return back()->with('message', 'Verification link sent!');
-//        })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-        /* payment */
-//        Route::get('/user/payment',[PaymentController::class,'payment'])->name('user.payment')->middleware('auth');
     });
 

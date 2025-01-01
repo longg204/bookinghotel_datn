@@ -29,7 +29,7 @@ return [
     | when delivering an email. You may specify which one you're using for
     | your mailers below. You may also add additional mailers if needed.
     |
-    | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    | Supported: "smtp", "sendmail.blade.php", "mailgun", "ses", "ses-v2",
     |            "postmark", "resend", "log", "array",
     |            "failover", "roundrobin"
     |
@@ -65,9 +65,9 @@ return [
             'transport' => 'resend',
         ],
 
-        'sendmail' => [
-            'transport' => 'sendmail',
-            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
+        'sendmail.blade.php' => [
+            'transport' => 'sendmail.blade.php',
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail.blade.php -bs -i'),
         ],
 
         'log' => [

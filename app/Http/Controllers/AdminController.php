@@ -23,18 +23,6 @@
     {
         public function index()
         {
-//            $orders = Order::orderBy("created_at", "DESC")->take(10);
-//            $dashboardDatas = DB::select("select sum(total) as TotalAmount,
-//                                                sum(if(status = 'ordered', total, 0)) as TotalOrderedAmount,
-//                                                sum(if(status = 'delivered', total, 0)) as TotalDeliveredAmount,
-//                                                sum(if(status = 'caceled', total, 0)) as TotalCanceledAmount,
-//                                                count(*) as Total,
-//                                                sum(if(status = 'ordered',1, 0)) as TotalOrdered,
-//                                                sum(if(status = 'delivered', 1, 0)) as TotalDelivered,
-//                                                sum(if(status = 'caceled', 1, 0)) as TotalCanceled
-//                                                from orders");
-//            dd(Auth::getUser());
-//            $user = User::find('id', Auth::getUser());
             return view('admin.index', compact([]));
         }
 

@@ -5,7 +5,9 @@
     use App\Models\Address;
     use App\Models\Coupon;
     use App\Models\OrderItem;
+    use App\Models\Room;
     use App\Models\Transaction;
+    use App\Models\Cart as CartModel;
     use Illuminate\Http\Request;
     use Carbon\Carbon;
     use Illuminate\Support\Facades\Auth;
@@ -14,10 +16,15 @@
 
     class CartController extends Controller
     {
-        public function index()
+        public function index(Request $request)
         {
+            if ($request->query('pay') == 'success') {
+                Cart::instance("cart")->destroy();
+            }
+
             $items = Cart::instance('cart')->content();
             $coupons = Coupon::all();
+
             return view("cart", compact(["items", "coupons"]));
         }
 
@@ -190,4 +197,23 @@
             return view('order-confirmation');
         }
 
+        public function store(Request $request)
+        {
+            $cart = new CartModel();
+            $cart->vat = 10;
+            $cart->user_id = Auth::user()->id;
+            $cart->room_id = $request->id;
+//            $cart->coupon_id = $request->coupon_id;
+
+            $cart->save();
+            return redirect()->back();
+        }
+
+        public function xxxx()
+        {
+            $items = CartModel::all();
+            dd($items);
+            $coupons = Coupon::all();
+            return view("cart", compact(["items", "coupons"]));
+        }
     }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('password');
+            $table->string("activation_token")->nullable();
             $table->string('utype')->default('USR')->comment('ADM for Admin and for User or Customer');
             $table->rememberToken();
             $table->timestamps();

@@ -1,15 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<style>
-    #header {
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
-
-    .logo__image {
-        max-width: 220px;
-    }
-</style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="contact-us container">
@@ -55,21 +45,21 @@
     </section>
 </main>
 @endsection
-{{--@push("scripts")--}}
-{{--    <script>--}}
-{{--        $(function () {--}}
-{{--            $('.qty-control__increase').on("click", function () {--}}
-{{--                $(this).closest("form").submit();--}}
-{{--            })--}}
+@push("scripts")
+    <script>
+        $(function () {
+            $('.qty-control__increase').on("click", function () {
+                $(this).closest("form").submit();
+            })
 
-{{--            $('.qty-control__reduce').on("click", function () {--}}
-{{--                $(this).closest("form").submit();--}}
-{{--            })--}}
+            $('.qty-control__reduce').on("click", function () {
+                $(this).closest("form").submit();
+            })
 
-{{--            $('.remove-cart').on("click", function () {--}}
-{{--                $(this).closest("form").submit();--}}
-{{--            })--}}
-{{--        })--}}
-{{--    </script>--}}
-{{--@endpush--}}
+            $('.remove-cart').on("click", function () {
+                $(this).closest("form").submit();
+            })
+        })
+    </script>
+@endpush
 

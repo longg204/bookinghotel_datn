@@ -88,6 +88,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @foreach($items as $item)
                                     <tr>
                                         <td>
@@ -231,9 +232,9 @@
                             <div class="mobile_fixed-btn_wrapper">
                                 <div class="button-wrapper container">
 {{--                                    <a href="{{ route("cart.checkout") }}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>--}}
-                                    <form action="{{ url('/payment') }}" method="POST">
+                                    <form action="{{ url('/payment-vnpay') }}" method="POST">
                                         @csrf
-                                        <button type="submit" name="redirect" class="btn btn-primary btn-checkout">Pay with VN Pay</button>
+                                        <button type="submit" name="redirect" class="btn btn-primary btn-checkout">Pay With VN Pay</button>
                                     </form>
                                 </div>
                             </div>
