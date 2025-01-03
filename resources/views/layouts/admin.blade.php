@@ -21,7 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('font/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('icon/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logohotel.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('images/favicon.ico') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
@@ -132,7 +132,14 @@
                             <li class="menu-item">
                                 <a href="{{ route("admin.coupon") }}" class="">
                                     <div class="icon"><i class="icon-grid"></i></div>
-                                    <div class="text">Coupns</div>
+                                    <div class="text">Coupons</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="{{ route("admin.contacts") }}" class="">
+                                    <div class="icon"><i class="icon-mail"></i></div>
+                                    <div class="text">Message</div>
                                 </a>
                             </li>
 
@@ -144,9 +151,9 @@
                             </li>
 
                             <li class="menu-item">
-                                <a href="settings.html" class="">
-                                    <div class="icon"><i class="icon-file-plus"></i></div>
-                                    <div class="text">Feedback</div>
+                                <a href="{{ route('admin.settings', ['id' => Auth::getUser()->id]) }}" class="">
+                                    <div class="icon"><i class="icon-settings"></i></div>
+                                    <div class="text">Setting</div>
                                 </a>
                             </li>
 

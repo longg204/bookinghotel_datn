@@ -324,7 +324,7 @@
                         <a href="{{ route("about") }}" class="navigation__link">About</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="{{ route("contact") }}" class="navigation__link">Contact</a>
+                        <a href="{{ route("home.contact") }}" class="navigation__link">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -410,7 +410,7 @@
                         <a href="{{ route("about") }}" class="navigation__link">About</a>
                     </li>
                     <li class="navigation__item">
-                        <a href="{{ route("contact") }}" class="navigation__link">Contact</a>
+                        <a href="{{ route("home.contact") }}" class="navigation__link">Contact</a>
                     </li>
                 </ul>
             </nav>

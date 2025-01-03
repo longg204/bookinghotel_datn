@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 use App\Models\Room;
@@ -25,5 +26,28 @@ class HomeController extends Controller
 
         $slides = Slide::where("status", 1)->get()->take(3);
         return view('index', compact(["slides","rooms","hotdeals"]));
+    }
+
+    public function contact()
+    {
+        return(view('contact'));
+    }
+
+    public function contact_store(Request $request)
+    {
+        $request ->validate([
+            'name' => 'required|max:100',
+            'email' => 'required|email',
+            'phone_number' => 'required|numeric|digits:10',
+            'comment' => 'required'
+        ]);
+
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone_number = $request->phone_number;
+        $contact->comment = $request->comment;
+        $contact->save();
+        return redirect()->back()->with('success', 'Your massage has been sent successfully');
     }
 }

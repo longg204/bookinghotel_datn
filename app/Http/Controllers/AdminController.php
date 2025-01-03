@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
 
     use App\Models\Category;
+    use App\Models\Contact;
     use App\Models\Coupon;
     use App\Models\Order;
     use App\Models\OrderItem;
@@ -15,6 +16,7 @@
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\File;
+    use Illuminate\Support\Facades\Hash;
     use Illuminate\Support\Str;
     use Intervention\Image\ImageManager;
     use Intervention\Image\Drivers\Gd\Driver;
@@ -449,31 +451,52 @@
             return view("admin.users", compact(["users"]));
         }
 
-
-//        public function user_edit($id)
-//        {
-//            $users = User::find($id);
-//            return view('admin.users-edit', compact('users'));
-//        }
-
-//        public function user_update(Request $request)
-//        {
-//            $request->validate(['name' => 'required','email' => 'required|unique:users,code', 'phone_number' => 'required|unique:users,code', 'email' => 'required']);
-//
-//            $user = User::find($request->id);
-//            $user->name = $request->name;
-//            $user->email = $request->email;
-//            $user->phone_number = $request->phone_number;
-//
-//            $user->save();
-//            return redirect()->route('admin.users')->with('status', 'User has been edited succesfully');
-//        }
-
         public function user_delete($id)
         {
             $user = User::find($id);
+//            dd($user);
             $user->delete();
             return redirect()->route('admin.users')->with('status', 'User has been deleted successfully');
+        }
+
+        public function contacts()
+        {
+            $contacts = Contact::orderBy('created_at','DESC')->paginate(10);
+            return view('admin.contacts', compact('contacts'));
+        }
+
+        public function contact_delete($id)
+        {
+            $contact = Contact::find($id);
+            $contact->delete();
+            return redirect()->route('admin.contacts')->with("status", "Contact deleted successfully");
+        }
+
+        public function setting($id)
+        {
+            $admin = User::findOrFail($id);
+            return view('admin.setting', compact('admin'));
+        }
+
+        public function update_password($id, Request $request)
+        {
+            // Lấy thông tin admin từ database
+            $admin = User::findOrFail($id);
+
+            if (!Hash::check($request->input('old_password'), $admin->password)) {
+                return back()->withErrors(['old_password' => 'Mật khẩu cũ không đúng.']);
+            }
+
+            $request->validate([
+                'new_password' => 'required|string|min:8|confirmed',
+            ]);
+            $admin->password = bcrypt($request->input('new_password'));
+            $admin->save();
+
+
+
+            // Chuyển hướng với thông báo thành công
+            return redirect()->back()->with('success', 'Cập nhật mật khẩu thành công');
         }
     }
 

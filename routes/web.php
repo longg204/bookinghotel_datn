@@ -19,7 +19,7 @@
     Auth::routes();
 
 
-    Route::get('/', [HomeController::class, 'index'])->name('home.index')->middleware(['auth', 'verified']);
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
     /* room */
     Route::get("/room", [RoomController::class, "index"])->name("room.index");
@@ -37,8 +37,8 @@
 
 
     /* contact */
-    Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
-//    Route::post("/contact", [ContactController::class, 'add_to_contact'])->name("contact.add");
+    Route::get('/contact-us', [HomeController::class, 'contact'])->name('home.contact');
+    Route::post("/contact/store", [HomeController::class, 'contact_store'])->name("home.contact.store");
 
 
     /* about */
@@ -77,11 +77,6 @@
         return redirect('/')->with('message', 'Email verified successfully!');
     })->middleware(['auth', 'signed'])->name('verification.verify');
 
-//    Route::get('/email/verify', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyNotice'])->name('verification.notice');
-//
-//    Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyEmail'])->middleware('signed')->name('verification.verify');
-//
-//    Route::post('/email/verification-notification', [\App\Http\Controllers\Auth\RegisterController::class, 'verifyHandler'])->middleware('throttle:6,1')->name('verification.send');
 
     /* admin */
     Route::middleware(['auth', AuthAdmin::class])->group(function () {
@@ -129,5 +124,14 @@
         /* users */
         Route::get('/admin/users',[AdminController::class,'users'])->name('admin.users');
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'user_delete'])->name('admin.user.delete');
+
+        /* contact */
+        Route::get('/admin.contact', [AdminController::class, 'contacts'])->name('admin.contacts');
+        Route::delete('/admin.contact/{id}/delete', [AdminController::class, 'contact_delete'])->name('admin.contact.delete');
+
+        /* setting */
+        Route::get('/admin/setting/{id}', [AdminController::class, 'setting'])->name('admin.settings');
+        Route::put('/admin/update/{id}', [AdminController::class, 'update_password'])->name('admin.password.update');
+
     });
 

@@ -25,8 +25,7 @@ class RegisterController extends Controller
         // Gửi email xác minh->chuyển hướng đến trang yêu cầu
         $user->sendEmailVerificationNotification();
 
-
-        return redirect()->route('verification.notice')->with('user', $user);;
+        return redirect()->route('verification.notice')->with('user', $user);
     }
 
     protected function validator(array $data)

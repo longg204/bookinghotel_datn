@@ -24,6 +24,7 @@ return new class extends Migration
                 $table->unsignedInteger("quantity")->default(10);
                 $table->string("image")->nullable();
                 $table->text("images")->nullable();
+                $table->integer("rating")->nullable();
                 $table->bigInteger("category_id")->unsigned();
                 $table->timestamps();
 
